@@ -45,6 +45,6 @@ class crawlingSpiderDemo(CrawlSpider):
         yield {
             "title": response.css(".product_main h1::text").get(),
             "price": response.css(".price_color::text").get(),
-            # This next one's messy because of how messy the page is. I think I could clean it up.
-            "availability": response.css(".availability::text")[1].get().replace("\n", "").replace(" ", "").replace("Instock", "").replace("available", "").replace("(", "").replace(")","")
+            # This next one's messy because of how messy the page format is.
+            "availability": response.css(".availability::text")[1].get().replace("In stock (", "").replace("available)", "").strip()
         }
