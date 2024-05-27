@@ -22,10 +22,12 @@ class crawlingSpiderDemo(CrawlSpider):
         item_num = response.css(".product-id span[itemprop='sku']::text").extract_first()
         price = response.css("span[id='price']::text").extract_first()
         stock = response.css("span[id='availability']::text").extract_first()
-
-        yield {
-            "item name": item_name if item_name else "N/A",
-            "item number": item_num.replace(":","").strip() if item_num else "N/A",
-            "price": price.replace("$","") if price else "N/A",
-            "stock": stock.replace(" In stock","") if stock else "N/A"
-            }
+        if item_name:
+            yield {
+                "item name": item_name ,
+                "item number": item_num.replace(":","").strip(),
+                "price": price.replace("$",""),
+                "stock": stock.replace(" In stock","")
+                }
+        else:
+            yield
