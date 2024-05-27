@@ -8,13 +8,15 @@ class crawlingSpiderDemo(CrawlSpider):
     start_urls = ["https://thebuilderssupply.com/"]
 
     custom_settings = {"FEED_URI": "theBuilderSupply_%(time)s.csv", 
-                       "FEED_FORMAT": "csv"}
+                       "FEED_FORMAT": "csv",
+                       "DUPEFILTER_CLASS": 'scrapy.dupefilters.RFPDupeFilter',
+                       }
 
     rules = (
         Rule(LinkExtractor(deny = ["/checkout.asp","/add_cart.asp", "/view_cart.asp", "/error.asp",
                            "/shipquote.asp", "/rssfeed.asp", "/mobile/", "/cgi-bin/",
                            "/private/", "/admin/", "/checkout/", "/cart/", "/account/"]
-                           ), callback = "parse_item"),
+                           ), follow = True, callback = "parse_item"),
     )
     
     def parse_item(self, response):
