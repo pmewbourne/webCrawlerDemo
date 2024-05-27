@@ -4,7 +4,7 @@ from scrapy.linkextractors import LinkExtractor
 class crawlingSpiderDemo(CrawlSpider):
 
     name = "buildCrawler"
-    allowed_domains = ["thebuildersupply.com"]
+    allowed_domains = ["thebuilderssupply.com"]
     start_urls = ["https://thebuilderssupply.com/"]
 
     custom_settings = {"FEED_URI": "theBuilderSupply_%(time)s.csv", 
