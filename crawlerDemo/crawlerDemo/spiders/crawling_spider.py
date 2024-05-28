@@ -1,5 +1,7 @@
 # Adapted from https://www.youtube.com/watch?v=m_3gjHGxIJc
 
+# In order to run this, navigate to webCrawlerDemo/crawlerDemo via the command line, then execute "scrapy crawl crawler1"
+
 # This sets up a webCrawler that crawls books.toscrape.com, a website made for rudimentary webscraping. 
 # This crawler crawls books.toscrape.com and iterates through all of the books on the website. 
 # It takes the title, price, and stock number of each and stores each value in a dictionary
