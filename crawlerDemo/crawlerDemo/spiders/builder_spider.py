@@ -1,7 +1,10 @@
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
+from scrapy.exceptions import CloseSpider
+
 
 class crawlingSpiderDemo(CrawlSpider):
+    crawlCounter = 0
 
     name = "buildCrawler"
     allowed_domains = ["thebuilderssupply.com"]
@@ -10,6 +13,7 @@ class crawlingSpiderDemo(CrawlSpider):
     custom_settings = {"FEED_URI": "theBuilderSupply_%(time)s.csv", 
                        "FEED_FORMAT": "csv",
                        "DUPEFILTER_CLASS": 'scrapy.dupefilters.RFPDupeFilter',
+                       "DUPEFILTER_DEBUG":True,
                        }
 
 
@@ -26,6 +30,9 @@ class crawlingSpiderDemo(CrawlSpider):
         price = response.css("span[id='price']::text").extract_first()
         stock = response.css("span[id='availability']::text").extract_first()
         if item_name:
+            self.crawlCounter += 1
+            if self.crawlCounter > 150:
+                raise CloseSpider(reason = "Max Items Reached")
             yield {
                 "item name": item_name,
                 "item number": item_num.replace(":","").strip(),
