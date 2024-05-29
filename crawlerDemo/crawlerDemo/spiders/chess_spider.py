@@ -21,23 +21,23 @@ class crawlingSpiderDemo(CrawlSpider):
 
     custom_settings = {"ROBOTSTXT_OBEY":True}
 
-    def __init__(self, filename=None):
+    def __init__(self, filename = None, *args, **kwargs):
+        super(crawlingSpiderDemo, self).__init__(*args, **kwargs)
         if filename:
             with open(filename, 'r') as f:
                 fileArgs = f.readlines()
-                print(f"fileArgs is {fileArgs} with type{type(fileArgs)}\n")
-                self.start_urls = fileArgs[0]
-                print(f"fileArgs is {fileArgs} with type{type(fileArgs[0])}\n")
-                self.allowed_domains = fileArgs[1]
-                print(f"fileArgs is {fileArgs[1]} with type{type(fileArgs[1])}\n")
-                self.rule_domains = fileArgs[2]
-                print(f"fileArgs is {fileArgs[2]} with type{type(fileArgs[2])}\n")
+                self.start_urls = [fileArgs[0].strip()]
+                self.allowed_domains = [fileArgs[1].strip()]
+                self.rule_domains = [fileArgs[2].strip()]
+                crawlingSpiderDemo.rules = (
+                    Rule(LinkExtractor(allow = self.rule_domains), callback = "parse_item", follow = True),
+                )
 
                 
 
-    rules = (
-        Rule(LinkExtractor(allow = rule_domains), callback = "parse_item"),
-    )
+    # rules = (
+    #     Rule(LinkExtractor(allow = rule_domains), callback = "parse_item"),
+    # )
     
     # Function to parse the current page and get the info of a chess opening
     def parse_item(self, response):
