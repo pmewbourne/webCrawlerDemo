@@ -75,20 +75,29 @@ class crawlingSpiderDemo(CrawlSpider):
         input: response, the current page being scraped
         output: returns a dictionary containing the name of a chess opening and what broad section it falls under.
         """
-        companyName = response.css(self.css_companyName)
-        companyAddress = response.css(self.css_companyAddress)
-        companyCity = response.css(self.css_companyCity)
-        companyCountry = response.css(self.css_companyCountry)
-        companyPhone = response.css(self.css_companyPhone)
-        companyFax = response.css(self.css_companyFax)
-        companyURL = response.css(self.css_companyURL)
-        companyEmail = response.css(self.css_companyEmail)
-        contactName = response.css(self.css_contactName)
-        contactPhone = response.css(self.css_contactPhone)
-        contactEmail = response.css(self.css_contactEmail)
+        companyName = response.css(self.css_companyName).get()
+        companyAddress = response.css(self.css_companyAddress).get()
+        companyCity = response.css(self.css_companyCity).get()
+        companyCountry = response.css(self.css_companyCountry).get()
+        companyPhone = response.css(self.css_companyPhone).get()
+        companyFax = response.css(self.css_companyFax).get()
+        companyURL = response.css(self.css_companyURL).get()
+        companyEmail = response.css(self.css_companyEmail).get()
+        contactName = response.css(self.css_contactName).get()
+        contactPhone = response.css(self.css_contactPhone).get()
+        contactEmail = response.css(self.css_contactEmail).get()
         yield {
             
             # Have to use css style to access these page elements
-            "title":response.css(self.css1).get(),
-            "section":response.css(self.css2).get()
+            "Name":companyName.strip() if companyName else "Not Provided",
+            "Address":companyAddress.strip() if companyAddress else "Not Provided",
+            "City":companyCity.strip() if companyCity else "Not Provided",
+            "Country":companyCountry.strip() if companyCountry else "Not Provided",
+            "Phone Number":companyPhone.strip() if companyPhone else "Not Provided",
+            "Fax Number":companyFax.strip() if companyFax else "Not Provided",
+            "URL":companyURL.strip() if companyURL else "Not Provided",
+            "Email":companyEmail.replace("mailto:","").strip() if companyEmail else "Not Provided",
+            "Contact Name":contactName.strip() if contactName else "Not Provided",
+            "Contact Phone Number":contactPhone.strip() if contactPhone else "Not Provided",
+            "Contact Email":contactEmail.replace("mailto:","").strip() if contactEmail else "Not Provided"
         }
