@@ -29,9 +29,8 @@ class crawlingSpiderDemo(CrawlSpider):
                 self.start_urls = [fileArgs[0].strip()]
                 self.allowed_domains = [fileArgs[1].strip()]
                 self.rule_domains = [fileArgs[2].strip()]
-                crawlingSpiderDemo.rules = (
-                    Rule(LinkExtractor(allow = self.rule_domains), callback = "parse_item", follow = True),
-                )
+                crawlingSpiderDemo.rules = ( Rule (LinkExtractor(allow=(self.rule_domains)), callback="parse_item",  follow= True),)
+                super(crawlingSpiderDemo, self)._compile_rules()
 
                 
 
