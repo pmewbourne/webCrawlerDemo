@@ -1,0 +1,15 @@
+https://www.stoneworld.com/directories/2169-stone-guide/
+stoneworld.com
+2169-stone-guide
+2169-stone-guide/listing
+[class="directory-listing-profile__company-name"]::text
+[class="directory-listing-profile__address1"]::text
+[class="directory-listing-profile__city"]::text
+[class="directory-listing-profile__country"]::text
+[class="directory-listing-profile__phone"]::text
+[class="directory-listing-profile__fax"]::text
+[class="url directory-listing-profile__url-link"] a::text
+[class="email directory-listing-profile__email"] a::attr(href)
+[class="directory-listing-custom-contacts__contact-name"]::text
+[class="directory-listing-custom-contacts__contact-phone"]::text
+[class="directory-listing-custom-contacts__contact-email"] a::attr(href)
