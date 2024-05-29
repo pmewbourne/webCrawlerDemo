@@ -15,11 +15,28 @@ class crawlingSpiderDemo(CrawlSpider):
     # allowed_domains - controls the scope of the urls that the crawler will attempt to access
     # start_urls - where the crawler will start searching from
     name = "chessCrawler"
-    allowed_domains = ["chesspathways.com"]
-    start_urls = ["https://chesspathways.com"]
+    # allowed_domains = ["chesspathways.com"]
+    # start_urls = ["https://chesspathways.com"]
+    rule_domains = ""
+
+    custom_settings = {"ROBOTSTXT_OBEY":True}
+
+    def __init__(self, filename=None):
+        if filename:
+            with open(filename, 'r') as f:
+                fileArgs = f.readlines()
+                print(f"fileArgs is {fileArgs} with type{type(fileArgs)}\n")
+                self.start_urls = fileArgs[0]
+                print(f"fileArgs is {fileArgs} with type{type(fileArgs[0])}\n")
+                self.allowed_domains = fileArgs[1]
+                print(f"fileArgs is {fileArgs[1]} with type{type(fileArgs[1])}\n")
+                self.rule_domains = fileArgs[2]
+                print(f"fileArgs is {fileArgs[2]} with type{type(fileArgs[2])}\n")
+
+                
 
     rules = (
-        Rule(LinkExtractor(allow = "chess-openings"), callback = "parse_item"),
+        Rule(LinkExtractor(allow = rule_domains), callback = "parse_item"),
     )
     
     # Function to parse the current page and get the info of a chess opening
