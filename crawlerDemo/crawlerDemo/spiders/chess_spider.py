@@ -21,6 +21,7 @@ class crawlingSpiderDemo(CrawlSpider):
 
     custom_settings = {"ROBOTSTXT_OBEY":True}
 
+    # Adapted from https://stackoverflow.com/questions/27865334/iterate-scrapy-crawl-over-several-text-files-containing-urls
     def __init__(self, filename = None, *args, **kwargs):
         super(crawlingSpiderDemo, self).__init__(*args, **kwargs)
         if filename:
@@ -29,6 +30,7 @@ class crawlingSpiderDemo(CrawlSpider):
                 self.start_urls = [fileArgs[0].strip()]
                 self.allowed_domains = [fileArgs[1].strip()]
                 self.rule_domains = [fileArgs[2].strip()]
+                # Adapted from https://stackoverflow.com/questions/27509489/how-to-dynamically-set-scrapy-rules
                 crawlingSpiderDemo.rules = ( Rule (LinkExtractor(allow=(self.rule_domains)), callback="parse_item",  follow= True),)
                 super(crawlingSpiderDemo, self)._compile_rules()
 
