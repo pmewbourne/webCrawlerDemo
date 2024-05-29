@@ -19,6 +19,9 @@ class crawlingSpiderDemo(CrawlSpider):
     # start_urls = ["https://chesspathways.com"]
     rule_domains = ""
 
+    css1 = ""
+    css2 = ""
+
     custom_settings = {"ROBOTSTXT_OBEY":True}
 
     # Adapted from https://stackoverflow.com/questions/27865334/iterate-scrapy-crawl-over-several-text-files-containing-urls
@@ -30,6 +33,8 @@ class crawlingSpiderDemo(CrawlSpider):
                 self.start_urls = [fileArgs[0].strip()]
                 self.allowed_domains = [fileArgs[1].strip()]
                 self.rule_domains = [fileArgs[2].strip()]
+                self.css1 = fileArgs[3]
+                self.css2 = fileArgs[4]
                 # Adapted from https://stackoverflow.com/questions/27509489/how-to-dynamically-set-scrapy-rules
                 crawlingSpiderDemo.rules = ( Rule (LinkExtractor(allow=(self.rule_domains)), callback="parse_item",  follow= True),)
                 super(crawlingSpiderDemo, self)._compile_rules()
@@ -48,6 +53,6 @@ class crawlingSpiderDemo(CrawlSpider):
         """
         yield {
             # Have to use css style to access these page elements
-            "title":response.css(".hgroup h1::text").get(),
-            "section":response.css('ol.breadcrumbs li:nth-child(3) span[itemprop="name"]::text').get()
+            "title":response.css(self.css1).get(),
+            "section":response.css(self.css2).get()
         }
