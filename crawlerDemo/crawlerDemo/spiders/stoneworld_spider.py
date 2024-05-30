@@ -102,10 +102,10 @@ class crawlingSpiderDemo(CrawlSpider):
         # contactPhone = response.css(self.css_contactPhone).get()
         # contactEmail = response.css(self.css_contactEmail).get()
         returnDict = {}
-        for i in range (0, self.cssDictListLen/2):
+        for i in range (0, self.cssDictListLen//2):
             curIndex = 2*i
-            key = self.cssDictList[curIndex]
-            value = self.cssDictList[curIndex + 1]
+            key = self.cssDictList[curIndex].strip()
+            value = self.stringCleaner(response.css(self.cssDictList[curIndex + 1]).get())
             returnDict[key] = value
         yield returnDict
         # yield {
