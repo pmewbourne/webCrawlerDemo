@@ -2,8 +2,6 @@ https://www.stoneworld.com/directories/2169-stone-guide/
 stoneworld.com
 2169-stone-guide
 2169-stone-guide/listing
-6
-28
 Name
 [class="directory-listing-profile__company-name"]::text
 Address
