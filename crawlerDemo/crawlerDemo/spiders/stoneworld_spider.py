@@ -80,6 +80,7 @@ class crawlingSpiderDemo(CrawlSpider):
     
     def stringCleaner(self, strToFix):
         if strToFix:
+            # strToFix = strToFix.replace('"',"").replace("  ", "")
             return strToFix.replace("\n","").replace("mailto:","").replace("Fax: ","").replace("Phone: ","").strip()
         else:
             return "Not Provided"
