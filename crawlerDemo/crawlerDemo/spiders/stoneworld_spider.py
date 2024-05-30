@@ -59,8 +59,10 @@ class crawlingSpiderDemo(CrawlSpider):
                 self.css_contactPhone = fileArgs[13].strip()
                 self.css_contactEmail = fileArgs[14].strip()
                 # Adapted from https://stackoverflow.com/questions/27509489/how-to-dynamically-set-scrapy-rules
-                crawlingSpiderDemo.rules = (Rule (LinkExtractor(allow=(self.crawl_domains)),  follow= True),
-                                            Rule (LinkExtractor(allow=(self.info_domains)), callback="parse_item",  follow= True))
+                crawlingSpiderDemo.rules = (
+                                            Rule (LinkExtractor(allow=(self.info_domains)), callback="parse_item",  follow= True),
+                                            Rule (LinkExtractor(allow=(self.crawl_domains)),  follow= True),
+                                            )
                 super(crawlingSpiderDemo, self)._compile_rules()
 
                 
@@ -70,6 +72,9 @@ class crawlingSpiderDemo(CrawlSpider):
     # )
     
     # Function to parse the current page and get the info of a chess opening
+    def stringCleaner(self, strToFix):
+        return
+
     def parse_item(self, response):
         """
         input: response, the current page being scraped
