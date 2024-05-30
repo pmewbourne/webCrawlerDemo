@@ -7,6 +7,8 @@
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
+import re
+
 
 class crawlingSpiderDemo(CrawlSpider):
 
@@ -80,8 +82,9 @@ class crawlingSpiderDemo(CrawlSpider):
     
     def stringCleaner(self, strToFix):
         if strToFix:
-            # strToFix = strToFix.replace('"',"").replace("  ", "")
-            return strToFix.replace("\n","").replace("mailto:","").replace("Fax: ","").replace("Phone: ","").strip()
+            cleanStr = strToFix.replace("\n","").replace("mailto:","").replace("Fax: ","").replace("Phone: ","").replace('"','').strip()
+            cleanStr = re.sub(r'\s+',' ', cleanStr)
+            return cleanStr
         else:
             return "Not Provided"
 
