@@ -2,14 +2,27 @@ https://www.stoneworld.com/directories/2169-stone-guide/
 stoneworld.com
 2169-stone-guide
 2169-stone-guide/listing
+6
+28
+Name
 [class="directory-listing-profile__company-name"]::text
+Address
 [class="directory-listing-profile__address1"]::text
+City
 [class="directory-listing-profile__city"]::text
+Country
 [class="directory-listing-profile__country"]::text
+Phone Number
 [class="directory-listing-profile__phone"]::text
+Fax Number
 [class="directory-listing-profile__fax"]::text
+URL
 [class="url directory-listing-profile__url-link"] a::text
+Email
 [class="email directory-listing-profile__email"] a::attr(href)
+Contact Name
 [class="directory-listing-custom-contacts__contact-name"]::text
+Contact Phone
 [class="directory-listing-custom-contacts__contact-phone"]::text
+Contact Email
 [class="directory-listing-custom-contacts__contact-email"] a::attr(href)
